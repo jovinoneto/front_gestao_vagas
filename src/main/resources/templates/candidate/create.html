@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Register Candidate</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width-device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 items-center flex justify-center">
+
+<form id="submitForm" action="" th:action="@{/candidate/create}" th:object="${candidate}" method="post" class="flex gap-24">
+
+    <div class="space-y-8 bg-zinc-950 rounded-md p-20 my-10">
+        <input th:field="*{username}" type="text" name="username"
+            class="bg-gray-50 text-gray-900 text-xd rounded w-96 p-4 focus:outline-none focus:ring-green-600 focus:ring-2 block"
+            placeholder="User">
+        <input th:field="*{name}" type="text" name="name"
+               class="bg-gray-50 text-gray-900 text-xd rounded w-96 p-4 focus:outline-none focus:ring-green-600 focus:ring-2 block"
+               placeholder="Name">
+        <input th:field="*{email}" type="text" name="email"
+               class="bg-gray-50 text-gray-900 text-xd rounded w-96 p-4 focus:outline-none focus:ring-green-600 focus:ring-2 block"
+               placeholder="E-mail">
+        <input th:field="*{password}" id="password" type="password" name="password"
+               class="bg-gray-50 text-gray-900 text-xd rounded w-96 p-4 focus:outline-none focus:ring-green-600 focus:ring-2 block"
+               placeholder="Password">
+        <input id="confirmPassword" type="password" name="confirmPassword"
+               class="bg-gray-50 text-gray-900 text-xd rounded w-96 p-4 focus:outline-none focus:ring-green-600 focus:ring-2 block"
+               placeholder="Confirm Password">
+        <textarea th:field="*{description}" class="bg-gray-50 text-gray-900 text-xd rounded w-96 p-4 focus:outline-none focus:ring-green-600 focus:ring-2 block"
+                placeholder="Enter your description"></textarea>
+        <span th:if="${error_message}"  th:attr="data-error=${error_message}" id="error-message"></span>
+
+        <button
+                class="bg-green-900 hover:bg-green-700 w-96 p-4 rounded text-white hover:text-zinc-950"
+        >SIGN UP</button>
+
+        <a href="/candidate/login"
+           class="block text-center underline underline-offset-2 text-green-700 hover:text-green-600"
+        >Login</a>
+    </div>
+</form>
+
+    <div   id="error" class="hidden absolute top-0 right-0 bg-white text-left shadow-xl">
+        <div class=" bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                    </svg>
+                </div>
+                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900">Error</h3>
+                    <div class="mt-2">
+                        <p id="error_password" class="text-sm text-gray-500"></p>
+                        <p id="error_back" class="text-red-400" ></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<script>
+
+    document.getElementById("submitForm").addEventListener("submit", (event) => {
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+
+        let errorPassword = document.getElementById("error_password");
+
+        if (password !== confirmPassword){
+            document.getElementById("error").classList.remove("hidden")
+            errorPassword.textContent = "Your passwords don't match!"
+
+            event.preventDefault()
+        }
+        setTimeout(() => {
+            document.getElementById("error").classList.add("hidden");
+        },3000);
+    })
+
+    let errorMessage = document.getElementById("error-message");
+    let errorElementMessage = errorMessage ? errorMessage.getAttribute("data-error") : null;
+
+    let errorBack = document.getElementById("error_back");
+    if (errorElementMessage) {
+        document.getElementById("error").classList.remove("hidden");
+
+        errorBack.append(errorElementMessage)
+    }
+
+    setTimeout(() => {
+        document.getElementById("error").classList.add("hidden");
+    },3000);
+
+</script>
+
+</html>
