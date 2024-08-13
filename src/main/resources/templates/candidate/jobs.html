@@ -2,49 +2,50 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <title>Profile Candidate</title>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width-device-width, initial-scale=1.0"/>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+    <head>
+        <title>Search Jobs</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width-device-width, initial-scale=1.0"/>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
 
-<body class="bg-gray-900">
-<nav class="bg-gray-800">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-start text-white">
-            <div class="space-x-4">
-                <a href="/candidate/profile" class="hover:text-gray-900">Profile</a>
-                <a href="/candidate/jobs" class="bg-gray-900 text-gray-300 rounded-md px-3 py-2">Jobs</a>
+    <body class="bg-gray-900">
+        <nav class="bg-gray-800">
+            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div class="relative flex h-16 items-center justify-start text-white">
+                    <div class="mr-auto space-x-4">
+                        <a href="/candidate/profile" class="hover:text-gray-900">Profile</a>
+                        <a href="/candidate/jobs" class="bg-gray-900 text-gray-300 rounded-md px-3 py-2">Jobs</a>
+                    </div>
+                    <div class="" >
+                        <a href="/candidate/logout" class="float-right hover:text-gray-900">Logout</a>
+                    </div>
+                </div>
             </div>
+        </nav>
+        <div class="container mx-auto mt-24 text-center">
+            <form action="">
+                <input type="text" name="filter" class="bg-gray-50 text-gray-500 rounded w-100 p-3 focus:outline-none"
+                       placeholder="Search job" />
+                <button class="bg-green-500 hover:bg-green-600 text-gray-900 hover:text-gray-500 w-24 p-3 rounded">Search</button>
+            </form>
+
+            <div class="max-w-md mx-auto mt-10">
+
+                <form th:action="@{/candidate/jobs/apply}" method="post">
+                    <div th:each="job: ${jobs}" class="bg-gray-800 text-gray-400 rounded-lg p-4 mb-4 shadow-md text-justify">
+                        <input th:value="${job.id}" type="hidden" name="jobId"/>
+                        <h3 th:text="${job.description}"></h3>
+                        <span th:text="${job.level}" class="block"></span>
+                        <span th:text="${job.benefits}" class="block"></span>
+
+                        <span class="bg-gray-900 p-0.5 my-2 block"></span>
+                        <button class="bg-gray-900 hover:bg-gray-400 text-gray-400 hover:text-gray-900 font-bold py-2 px-4 rounded">Apply</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
-    </div>
-</nav>
-<div class="container mx-auto mt-24 text-center">
-    <form action="">
-        <input type="text" name="filter" class="bg-gray-50 text-gray-500 rounded w-100 p-3 focus:outline-none"
-               placeholder="Search job" />
-        <button class="bg-green-500 hover:bg-green-600 text-gray-900 hover:text-gray-500 w-24 p-3 rounded">Search</button>
-    </form>
-
-    <div class="max-w-md mx-auto mt-10">
-
-        <form th:action="@{/candidate/jobs/apply}" method="post">
-            <div th:each="job: ${jobs}" class="bg-gray-800 text-gray-400 rounded-lg p-4 mb-4 shadow-md text-justify">
-                <input th:value="${job.id}" type="hidden" name="jobId"/>
-                <h3 th:text="${job.description}"></h3>
-                <span th:text="${job.level}" class="block"></span>
-                <span th:text="${job.benefits}" class="block"></span>
-
-                <span class="bg-gray-900 p-0.5 my-2 block"></span>
-                <button class="bg-gray-900 hover:bg-gray-400 text-gray-400 hover:text-gray-900 font-bold py-2 px-4 rounded">Apply</button>
-            </div>
-        </form>
-    </div>
-
-</div>
-
-
-</body>
+    </body>
 
 </html>

@@ -1,5 +1,6 @@
-package br.com.usatec.front_gestao_vagas.modules.candidate.service;
+package br.com.usatec.front_gestao_vagas.modules.company.service;
 
+import br.com.usatec.front_gestao_vagas.modules.company.dto.CreateJobsDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -7,23 +8,21 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.UUID;
-
 @Service
-public class ApplyJobService {
+public class CreateJobService {
 
     @Value("${host.api.gestao.vagas}")
     private String hostApi;
 
-    public String execute(String token, UUID idJob) {
+    public String execute(CreateJobsDTO jobs, String token) {
         RestTemplate rt = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(token);
 
-        HttpEntity<UUID> request = new HttpEntity<>(idJob, headers);
+        HttpEntity<CreateJobsDTO> request = new HttpEntity<>(jobs, headers);
 
-        return rt.postForObject(hostApi.concat("/candidate/job/apply"), request, String.class);
+        return rt.postForObject(hostApi.concat("/company/job/"), request, String.class);
     }
 }

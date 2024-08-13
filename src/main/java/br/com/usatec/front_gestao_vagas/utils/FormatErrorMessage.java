@@ -1,4 +1,4 @@
-package br.com.usatec.front_gestao_vagas.modules.candidate.utils;
+package br.com.usatec.front_gestao_vagas.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

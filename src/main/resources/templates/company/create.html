@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Register Candidate</title>
+    <title>Register Company</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width-device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,44 +11,49 @@
 
 <body class="bg-gray-900">
 
-    <form id="submitForm" action="" th:action="@{/candidate/create}" th:object="${candidate}" method="post">
+<form id="submitForm" action="" th:action="@{/company/create}" th:object="${company}" method="post">
 
-        <div class="bg-zinc-950 rounded-md m-10">
-            <div class="bg-gray-800 rounded-t-md py-3">
-                <p class="text-gray-300 flex justify-center">Register Candidate</p>
-            </div>
-            <div class="px-20 py-10 grid gap-8 grid-cols-1 md:grid-cols-2 lx:grid-cols-3 xl:grid-cols-3">
-                <input th:field="*{username}" type="text" name="username"
-                    class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
-                    placeholder="User">
-                <input th:field="*{name}" type="text" name="name"
-                       class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
-                       placeholder="Name">
-                <input th:field="*{email}" type="text" name="email"
-                       class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
-                       placeholder="E-mail">
-                <input th:field="*{password}" id="password" type="password" name="password"
-                       class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
-                       placeholder="Password">
-                <input id="confirmPassword" type="password" name="confirmPassword"
-                       class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
-                       placeholder="Confirm Password">
-                <textarea th:field="*{description}" class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14 md:col-span-2"
-                        placeholder="Enter your description"></textarea>
-                <span th:if="${error_message}"  th:attr="data-error=${error_message}" id="error-message"></span>
+    <div class="bg-zinc-950 rounded-md m-10">
+        <div class="bg-gray-800 rounded-t-md py-3">
+            <p class="text-gray-300 flex justify-center">Register Company</p>
+        </div>
+        <div class="px-20 py-10 grid gap-8 grid-cols-1 md:grid-cols-2 lx:grid-cols-3 xl:grid-cols-4">
+            <input th:field="*{username}" type="text" name="username"
+                   class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
+                   placeholder="User">
+            <input th:field="*{name}" type="text" name="name"
+                   class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
+                   placeholder="Name">
+            <input th:field="*{email}" type="text" name="email"
+                   class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
+                   placeholder="E-mail">
+            <input th:field="*{password}" id="password" type="password" name="password"
+                   class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
+                   placeholder="Password">
+            <input id="confirmPassword" type="password" name="confirmPassword"
+                   class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
+                   placeholder="Confirm Password">
+            <input th:field="*{website}" id="website" type="text" name="website"
+                   class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14"
+                   placeholder="website">
+            <textarea th:field="*{description}" class="bg-gray-50 text-gray-900 text-xd rounded p-4 focus:outline-none focus:ring-green-600 focus:ring-2 h-14 md:col-span-2"
+                      placeholder="Enter your description"></textarea>
+            <span th:if="${error_message}"  th:attr="data-error=${error_message}" id="error-message"></span>
 
-                <button
-                        class="bg-green-900 hover:bg-green-700 p-4 rounded text-white hover:text-zinc-950 md:col-span-1 lx:col-span-2 xl:col-span-2"
-                >SIGN UP</button>
+            <button
+                    class="bg-green-900 hover:bg-green-700 p-4 rounded text-white hover:text-zinc-950 lg:col-span-2"
+            >SIGN UP</button>
 
-                <div class="text-center p-4">
-                    <a href="/candidate/login"
-                       class="block text-center underline underline-offset-2 text-green-700 hover:text-green-600"
-                    >Login</a>
-                </div>
+
+            <div class="text-center p-4 lg:col-span-2">
+                <a href="/company/login"
+                   class="underline underline-offset-2 text-green-700 hover:text-green-600"
+                >Login</a>
             </div>
         </div>
-    </form>
+    </div>
+
+</form>
 
     <div   id="error" class="hidden absolute top-0 right-0 bg-white text-left shadow-xl">
         <div class=" bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">

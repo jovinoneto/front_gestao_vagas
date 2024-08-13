@@ -2,7 +2,7 @@ package br.com.usatec.front_gestao_vagas.modules.candidate.controller;
 
 import br.com.usatec.front_gestao_vagas.modules.candidate.dto.CreateCandidateDTO;
 import br.com.usatec.front_gestao_vagas.modules.candidate.service.*;
-import br.com.usatec.front_gestao_vagas.modules.candidate.utils.FormatErrorMessage;
+import br.com.usatec.front_gestao_vagas.utils.FormatErrorMessage;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -117,7 +117,8 @@ public class CandidateController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("candidate", new CreateCandidateDTO());
-        return "candidate/create"; }
+        return "candidate/create";
+    }
 
     @PostMapping("/create")
     public String save(CreateCandidateDTO candidate, Model model) {
@@ -129,6 +130,14 @@ public class CandidateController {
         }
         model.addAttribute("candidate", candidate);
         return "candidate/create";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("SPRING_SECURITY_CONTEXT");
+        session.removeAttribute("token");
+
+        return "redirect:/candidate/login";
     }
 
     private String getToken() {

@@ -1,4 +1,4 @@
-package br.com.usatec.front_gestao_vagas.modules.candidate.service;
+package br.com.usatec.front_gestao_vagas.modules.company.service;
 
 import br.com.usatec.front_gestao_vagas.modules.candidate.dto.Token;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class CandidateService {
+public class LoginCompanyService {
 
     @Value("${host.api.gestao.vagas}")
     private String hostApi;
 
-    public Token login(String username, String password) {
+    public Token execute(String username, String password) {
         RestTemplate rt = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -29,6 +29,6 @@ public class CandidateService {
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(data, headers);
 
-        return rt.postForObject(hostApi.concat("/candidate/auth"), request, Token.class);
+        return rt.postForObject(hostApi.concat("/company/auth"), request, Token.class);
     }
 }
